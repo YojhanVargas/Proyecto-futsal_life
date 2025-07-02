@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La calera Futsal Life</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="../css/image/logo-light-transparent.png" alt="escuela logo">
+        </div>
+        <nav>
+            <a href="./index.html">INICIO</a>
+        </nav>
+        <div class="contact-info">
+            <a href="./login.html" class="contact-button">Registrarse/Iniciar Sesión</a>
+        </div>
+    </header>
+    <br>
+    <br>
+        <main style="
+    height: 440px;
+">
+        <div class="contenedor__todo">
+            <div class="caja__trasera">
+                <div class="caja__trasera-login">
+                    <h3>¿Ya eres parte de nuestra escuela?</h3>
+                    <p>Inicia sesión para ser parte de esta familia</p>
+                    <button id="btn__iniciar-sesion">Iniciar Sesión</button>
+                </div>
+                <div class="caja__trasera-register">
+                    <h3>¿Aún no eres miembro?</h3>
+                    <button id="btn__registrarse">Regístrate</button>
+                </div>
+            </div>
+
+            <!--Formulario de Login y registro-->
+            <div class="contenedor__login-register">
+                <!--Login-->
+                <form id="login-form" class="formulario__login">
+                    <h2> Iniciar Sesión </h2>
+                    <!-- Div para mostrar errores del backend -->
+                    <div id="login-error-message" style="color: red; margin-bottom: 15px; text-align: center;"></div>
+
+                    <div class="input-container">
+                        <label for="login-email">Correo Electrónico</label>
+                        <input type="email" id="login-email" name="Correo" required>
+                    </div>
+
+                    <div class="input-container">
+                        <label for="login-password">Contraseña</label>
+                        <div class="password-container">
+                            <input type="password" id="login-password" name="Contraseña" required>
+                            <!-- Ojo: El onclick ya está manejado en el JS unificado, pero lo dejamos por si acaso -->
+                            <button type="button" class="toggle-password"
+                                onclick="togglePassword('login-password')">👁️</button>
+                        </div>
+                    </div>
+                    <div class="input-container" style="text-align: left; margin-top: 5px;">
+                        <a href="recuperar.html" style="font-size: 0.9em; color: #007BFF; text-decoration: none;">
+                           ¿Olvidaste tu contraseña?
+                        </a>
+                  </div>
+                    <button type="submit">Entrar</button>
+                </form>
+<form id="register-form" class="formulario__register">
+    <h2> Regístrate </h2>
+    <div id="register-error-message" style="color: red; margin-bottom: 15px; text-align: center;"></div>
+
+    <div class="input-container">
+        <label for="register-nombre">Nombre</label>
+        <input type="text" id="register-nombre" name="Nombre" required>
+    </div>
+    <div class="input-container">
+        <label for="register-apellido">Apellido</label>
+        <input type="text" id="register-apellido" name="Apellido" required>
+    </div>
+    <div class="input-container">
+        <label for="register-email">Correo Electrónico</label>
+        <input type="email" id="register-email" name="Correo" required>
+    </div>
+    <div class="input-container">
+        <label for="register-direccion">Dirección</label>
+        <input type="text" id="register-direccion" name="Direccion" required>
+    </div>
+    <div class="input-container">
+        <label for="register-telefono">Teléfono</label>
+        <input type="tel" id="register-telefono" name="Telefono" required>
+    </div>
+
+    <div class="input-container">
+        <label for="register-rol">Selecciona Rol</label>
+        <select id="register-rol" name="Id_Rol" required>
+            <option value="" disabled selected>Selecciona Rol</option>
+            <option value="1">Entrenador</option>
+            <option value="2">Jugador</option>
+        </select>
+    </div>
+
+    <!-- ===== NUEVO CAMPO DE CATEGORÍA (INICIALMENTE OCULTO) ===== -->
+    <div class="input-container" id="categoria-container" style="display: none;">
+        <label for="register-categoria">Selecciona Categoría</label>
+        <select id="register-categoria" name="Id_Categoria">
+            <option value="" disabled selected>Selecciona una categoría</option>
+            <option value="1">Iniciación</option>
+            <option value="2">Prejuvenil</option>
+            <option value="3">Juvenil</option>
+            <option value="4">Unica/Mayores</option>
+        </select>
+    </div>
+    <!-- ========================================================== -->
+
+    <div class="input-container">
+        <label for="register-password">Contraseña</label>
+        <div class="password-container">
+            <input type="password" id="register-password" name="Contraseña" required>
+            <button type="button" class="toggle-password" onclick="togglePassword('register-password')">👁️</button>
+        </div>
+    </div>
+    <button type="submit">Regístrate</button>
+</form>
+
+            </div>
+            </form>
+        </div>
+        </div>
+    </main>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Scripts -->
+    <script src="../controllers/loginController.js"></script>
+    <br>
+    <br>
+    <br>
+
+    <footer style="
+    margin-top: 40px;
+">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>¡Estamos aquí para ayudarte!</h3>
+                <p>📅 <strong>Lunes, miercoles y Viernes:</strong> 4:30 PM - 7:00 PM<br>
+            </div>
+
+
+            <div class="footer-section">
+                <h3><img src="../css/image/logo-light-transparent.png" alt="Logo"></h3>
+                <div class="social-icons">
+                    <a href="#"><img src="../css/image/faceb.png" alt="Facebook"></a>
+                    <a href="#"><img src="../css/image/whats.png" alt="WhatsApp"></a>
+                    <a href="#"><img src="../css/image/insta.png" alt="Instagram"></a>
+                </div>
+            </div>
+            <div class="footer-section contact-us">
+                <h3>Correo institucional:
+                    contactenos@lacalera-cundinamarca.gov.co
+                    notificacionjudicial@lacalera-cundinamarca.gov.co
+                </h3>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Asesorado, diseñado y desarrollado por: NYS. © 2024 </p>
+            <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
+        </div>
+    </footer>
+</body>
+
+</html>

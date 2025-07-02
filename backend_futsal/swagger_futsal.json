@@ -1,0 +1,398 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Futsal Life API",
+    "version": "1.0.3",
+    "description": "Documentación Swagger funcional completa para todos los endpoints de Futsal Life, listo para Swagger Editor y Thunder Client sin errores de parseo."
+  },
+  "servers": [
+    { "url": "http://localhost:3000/api" }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    { "bearerAuth": [] }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Registrar usuario",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nombre": { "type": "string" },
+                  "Apellido": { "type": "string" },
+                  "Correo": { "type": "string" },
+                  "Contraseña": { "type": "string" }
+                },
+                "required": ["Nombre", "Apellido", "Correo", "Contraseña"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Usuario registrado correctamente" } }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Iniciar sesión",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Correo": { "type": "string" },
+                  "Contraseña": { "type": "string" }
+                },
+                "required": ["Correo", "Contraseña"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Inicio de sesión exitoso" } }
+      }
+    },
+    "/auth/recuperar-password": {
+      "post": {
+        "summary": "Recuperar contraseña",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Correo": { "type": "string" }
+                },
+                "required": ["Correo"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Correo de recuperación enviado" } }
+      }
+    },
+    "/auth/reset-password/{token}": {
+      "post": {
+        "summary": "Restablecer contraseña",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Contraseña": { "type": "string" }
+                },
+                "required": ["Contraseña"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Contraseña restablecida correctamente" } }
+      }
+    },
+    "/correo/enviar-correo": {
+      "post": {
+        "summary": "Enviar correo personalizado",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "destinatario": { "type": "string" },
+                  "asunto": { "type": "string" },
+                  "contenido": { "type": "string" }
+                },
+                "required": ["destinatario", "asunto", "contenido"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Correo enviado correctamente" } }
+      }
+    },
+    "/convocatorias/convocatorias": {
+      "post": {
+        "summary": "Crear convocatoria",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Id_Partido": { "type": "integer" },
+                  "Id_Jugador": { "type": "integer" }
+                },
+                "required": ["Id_Partido", "Id_Jugador"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Convocatoria creada correctamente" } }
+      }
+    },
+    "/convocatorias/convocatorias/responder": {
+      "put": {
+        "summary": "Responder convocatoria",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Id_Convocatoria": { "type": "integer" },
+                  "Respuesta": { "type": "string", "enum": ["Sí", "No"] }
+                },
+                "required": ["Id_Convocatoria", "Respuesta"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Respuesta registrada correctamente" } }
+      }
+    },
+    "/equipos": {
+      "post": {
+        "summary": "Crear equipo",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nombre": { "type": "string" },
+                  "Categoria": { "type": "string" }
+                },
+                "required": ["Nombre", "Categoria"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Equipo creado correctamente" } }
+      },
+      "get": {
+        "summary": "Obtener equipos",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Lista de equipos" } }
+      }
+    },
+    "/equipo/{id}": {
+      "put": {
+        "summary": "Actualizar equipo",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nombre": { "type": "string" },
+                  "Categoria": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Equipo actualizado correctamente" } }
+      },
+      "delete": {
+        "summary": "Eliminar equipo",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Equipo eliminado correctamente" } }
+      }
+    },
+    "/jugadores": {
+      "post": {
+        "summary": "Crear jugador",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nombre": { "type": "string" },
+                  "Apellido": { "type": "string" },
+                  "Id_Equipo": { "type": "integer" },
+                  "Id_Categoria": { "type": "integer" }
+                },
+                "required": ["Nombre", "Apellido", "Id_Equipo", "Id_Categoria"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Jugador creado correctamente" } }
+      },
+      "get": {
+        "summary": "Obtener jugadores",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Lista de jugadores" } }
+      }
+    },
+    "/jugador/{id}": {
+      "put": {
+        "summary": "Actualizar jugador",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nombre": { "type": "string" },
+                  "Apellido": { "type": "string" },
+                  "Id_Equipo": { "type": "integer" },
+                  "Id_Categoria": { "type": "integer" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Jugador actualizado correctamente" } }
+      },
+      "delete": {
+        "summary": "Eliminar jugador",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": { "200": { "description": "Jugador eliminado correctamente" } }
+      }
+    },
+    "/partidos/partidos": {
+      "post": {
+        "summary": "Crear partido",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Fecha": { "type": "string", "format": "date" },
+                  "Hora": { "type": "string" },
+                  "Lugar": { "type": "string" },
+                  "Categoria": { "type": "string" },
+                  "Equipo_Contrario": { "type": "string" }
+                },
+                "required": ["Fecha", "Hora", "Lugar", "Categoria", "Equipo_Contrario"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Partido creado correctamente" } }
+      }
+    },
+    "/perfil": {
+      "get": {
+        "summary": "Obtener perfil",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Perfil obtenido correctamente" } }
+      },
+      "put": {
+        "summary": "Actualizar perfil",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nombre": { "type": "string" },
+                  "Apellido": { "type": "string" },
+                  "Correo": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Perfil actualizado correctamente" } }
+      }
+    },
+    "/perfil/foto": {
+      "post": {
+        "summary": "Subir foto de perfil",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "foto": { "type": "string", "format": "binary" }
+                },
+                "required": ["foto"]
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Foto de perfil actualizada correctamente" } }
+      }
+    },
+    "/usuario/{id}": {
+      "put": {
+        "summary": "Actualizar usuario",
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Nombre": { "type": "string" },
+                  "Apellido": { "type": "string" },
+                  "Correo": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "Usuario actualizado correctamente" } }
+      }
+    },
+    "/protegida/bienvenido": {
+      "get": {
+        "summary": "Ruta protegida de prueba",
+        "security": [{ "bearerAuth": [] }],
+        "responses": { "200": { "description": "Acceso exitoso a ruta protegida" } }
+      }
+    }
+  }
+}
