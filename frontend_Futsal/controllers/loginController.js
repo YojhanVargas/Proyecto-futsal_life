@@ -1,33 +1,19 @@
 document.addEventListener("DOMContentLoaded", function() {
-
-
     // --- SECCIÓN 1: DECLARACIÓN DE VARIABLES DEL DOM ---
-    
-    // Contenedores y Cajas Traseras (para la animación)
     const contenedor_login_register = document.querySelector(".contenedor__login-register");
     const caja_trasera_login = document.querySelector(".caja__trasera-login");
     const caja_trasera_register = document.querySelector(".caja__trasera-register");
-
-    // Formularios
     const formulario_login = document.getElementById("login-form");
     const formulario_register = document.getElementById("register-form"); 
-
-    // Divs para mostrar errores
     const loginErrorMessageDiv = document.getElementById('login-error-message');
     const registerErrorMessageDiv = document.getElementById('register-error-message');
-
-    // Botones para cambiar entre vistas
     const btn_iniciar_sesion = document.getElementById("btn__iniciar-sesion");
     const btn_registrarse = document.getElementById("btn__registrarse");
-    
-    // Nuevas variables para la lógica de categoría
     const rolSelector = document.getElementById('register-rol');
     const categoriaContainer = document.getElementById('categoria-container');
     const categoriaSelector = document.getElementById('register-categoria');
 
-
-    // --- SECCIÓN 2: LÓGICA DE ANIMACIÓN (MOSTRAR/OCULTAR FORMULARIOS) ---
-
+    // --- SECCIÓN 2: LÓGICA DE ANIMACIÓN ---
     function iniciarSesionVista() {
         if (window.innerWidth > 850) {
             formulario_login.style.display = "block";
@@ -60,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
             caja_trasera_login.style.opacity = "1";
         }
     }
-    
+
     function anchoPage() {
         if (window.innerWidth > 850) {
             caja_trasera_register.style.display = "block";
@@ -74,38 +60,27 @@ document.addEventListener("DOMContentLoaded", function() {
             contenedor_login_register.style.left = "0px";
         }
     }
-    
-    // Asignar los eventos a los botones de la animación y al cambio de tamaño
+
     btn_iniciar_sesion.addEventListener("click", iniciarSesionVista);
     btn_registrarse.addEventListener("click", registerVista);
     window.addEventListener("resize", anchoPage);
-    
-    // Ejecutar las funciones iniciales para establecer el estado correcto
     anchoPage();
     iniciarSesionVista(); 
 
-
     // --- SECCIÓN 3: LÓGICA CONDICIONAL DE CATEGORÍA ---
-
-    // Escuchamos el evento 'change' en el selector de rol
     rolSelector.addEventListener('change', function() {
-        const selectedRol = this.value; // 'this' se refiere a rolSelector
-
-        // Si el rol es Jugador (valor '2') o Acudiente (valor '3')
+        const selectedRol = this.value;
         if (selectedRol === '2' || selectedRol === '3') {
-            categoriaContainer.style.display = 'block'; // Mostramos el contenedor de categoría
-            categoriaSelector.required = true; // Hacemos que la categoría sea obligatoria
+            categoriaContainer.style.display = 'block';
+            categoriaSelector.required = true;
         } else {
-            categoriaContainer.style.display = 'none'; // Ocultamos el contenedor
-            categoriaSelector.required = false; // Ya no es obligatoria
-            categoriaSelector.value = ''; // Reseteamos su valor
+            categoriaContainer.style.display = 'none';
+            categoriaSelector.required = false;
+            categoriaSelector.value = '';
         }
     });
 
-
-    // --- SECCIÓN 4: LÓGICA DE CONEXIÓN CON EL BACKEND ---
-
-    // -- CONEXIÓN DEL FORMULARIO DE LOGIN --
+    // --- SECCIÓN 4: CONEXIÓN CON EL BACKEND ---
     formulario_login.addEventListener('submit', async function (e) {
         e.preventDefault();
         loginErrorMessageDiv.textContent = '';
@@ -120,11 +95,9 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             const data = await response.json();
             if (response.ok) {
-                alert(data.mensaje);
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('idUsuario', data.usuario.id);
 
-                // 🟡 Agregar rol legible para usar en frontend
                 if (data.usuario.rol === 1) {
                     localStorage.setItem('userRole', 'entrenador');
                     window.location.href = 'indexEntrenador.html';
@@ -133,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     window.location.href = 'indexJugador.html';
                 } else {
                     localStorage.setItem('userRole', 'otro');
-                    window.location.href = 'indexJugador.html'; // o a donde quieras
+                    window.location.href = 'indexJugador.html';
                 }
             } else {
                 loginErrorMessageDiv.textContent = data.mensaje;
@@ -143,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // -- CONEXIÓN DEL FORMULARIO DE REGISTRO --
     formulario_register.addEventListener('submit', async function (e) {
         e.preventDefault();
         registerErrorMessageDiv.textContent = '';
@@ -175,7 +147,6 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             const data = await response.json();
             if (response.ok) {
-                alert(data.mensaje);
                 iniciarSesionVista(); 
             } else {
                 registerErrorMessageDiv.textContent = data.mensaje;
@@ -186,12 +157,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// Función global para el onclick del HTML
+// Función para mostrar/ocultar contraseña
 function togglePassword(inputId) {
     const input = document.getElementById(inputId);
-    if (input.type === 'password') {
-        input.type = 'text';
-    } else {
-        input.type = 'password';
-    }
+    input.type = input.type === 'password' ? 'text' : 'password';
 }

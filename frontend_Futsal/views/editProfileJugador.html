@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <style>
         /* Estilo para el botón en la sección de contacto */
+        
         .contact-info {
             display: flex;
             gap: 20px;
@@ -445,6 +446,39 @@
         </div>
     </footer>
     <script src="../js/script.js"></script>
+    <!-- Notificación visual personalizada -->
+<div id="notification" class="notification"></div>
+
+<style>
+  .notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #4a90e2; /* Azul principal */
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    transform: translateY(-20px);
+  }
+
+  .notification.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .notification.error {
+    background-color: #e74c3c; /* Rojo error */
+  }
+</style>
+
 </body>
 
 </html>

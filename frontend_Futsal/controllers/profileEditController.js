@@ -1,8 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
-  if (!token) return alert("No hay sesión activa");
+  if (!token) return mostrarNotificacion("No hay sesión activa", true);
 
-  // Elementos del DOM
+  const notificationDiv = document.getElementById("notification");
+
+  function mostrarNotificacion(mensaje, esError = false) {
+    notificationDiv.textContent = mensaje;
+    notificationDiv.className = "notification show" + (esError ? " error" : "");
+    setTimeout(() => {
+      notificationDiv.classList.remove("show");
+    }, 3000);
+  }
+
   const profilePic = document.getElementById("profile-pic");
   const nameSpan = document.getElementById("profile-name");
   const emailSpan = document.getElementById("profile-email");
@@ -21,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputAddress = document.getElementById("address");
   const inputFoto = document.getElementById("profile-pic-input");
 
-  // 🔄 Cargar perfil
   async function cargarPerfil() {
     try {
       const res = await fetch("http://localhost:3000/api/perfil", {
@@ -50,17 +58,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } catch (error) {
       console.error("❌ Error al cargar perfil:", error);
-      alert("No se pudo cargar el perfil");
+      mostrarNotificacion("No se pudo cargar el perfil", true);
     }
   }
 
-  // 🔁 Mostrar formulario
   editBtn.addEventListener("click", () => {
     viewContainer.style.display = "none";
     editContainer.style.display = "block";
   });
 
-  // 📨 Enviar cambios
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     try {
@@ -81,9 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const updateJson = await updateRes.json();
       if (!updateRes.ok) throw new Error(updateJson.mensaje);
 
-      alert("Perfil actualizado correctamente");
+      mostrarNotificacion("Perfil actualizado correctamente");
 
-      // Subir imagen si se seleccionó
       if (inputFoto.files.length > 0) {
         const formData = new FormData();
         formData.append("foto", inputFoto.files[0]);
@@ -97,17 +102,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const fotoJson = await fotoRes.json();
         if (!fotoRes.ok) throw new Error(fotoJson.mensaje);
 
-        alert("Imagen actualizada");
+        mostrarNotificacion("Imagen actualizada");
       }
 
-      // 🔁 Recargar y volver a vista normal
       await cargarPerfil();
       editContainer.style.display = "none";
       viewContainer.style.display = "block";
 
     } catch (error) {
       console.error("❌ Error al actualizar perfil:", error);
-      alert("Error al actualizar perfil: " + error.message);
+      mostrarNotificacion("Error al actualizar perfil: " + error.message, true);
     }
   });
 
