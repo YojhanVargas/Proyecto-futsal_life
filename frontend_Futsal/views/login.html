@@ -24,7 +24,7 @@
     </header>
     <br>
     <br>
-        <main style="
+    <main style="
     height: 440px;
 ">
         <div class="contenedor__todo">
@@ -64,67 +64,85 @@
                     </div>
                     <div class="input-container" style="text-align: left; margin-top: 5px;">
                         <a href="recuperar.html" style="font-size: 0.9em; color: #007BFF; text-decoration: none;">
-                           ¿Olvidaste tu contraseña?
+                            ¿Olvidaste tu contraseña?
                         </a>
-                  </div>
+                    </div>
                     <button type="submit">Entrar</button>
                 </form>
-<form id="register-form" class="formulario__register">
-    <h2> Regístrate </h2>
-    <div id="register-error-message" style="color: red; margin-bottom: 15px; text-align: center;"></div>
+                <form id="register-form" class="formulario__register">
+                    <h2> Regístrate </h2>
+                    <div id="register-error-message" style="color: red; margin-bottom: 15px; text-align: center;"></div>
 
-    <div class="input-container">
-        <label for="register-nombre">Nombre</label>
-        <input type="text" id="register-nombre" name="Nombre" required>
-    </div>
-    <div class="input-container">
-        <label for="register-apellido">Apellido</label>
-        <input type="text" id="register-apellido" name="Apellido" required>
-    </div>
-    <div class="input-container">
-        <label for="register-email">Correo Electrónico</label>
-        <input type="email" id="register-email" name="Correo" required>
-    </div>
-    <div class="input-container">
-        <label for="register-direccion">Dirección</label>
-        <input type="text" id="register-direccion" name="Direccion" required>
-    </div>
-    <div class="input-container">
-        <label for="register-telefono">Teléfono</label>
-        <input type="tel" id="register-telefono" name="Telefono" required>
-    </div>
+                    <div class="input-container">
+                        <label for="register-nombre">Nombre</label>
+                        <input type="text" id="register-nombre" name="Nombre" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="register-apellido">Apellido</label>
+                        <input type="text" id="register-apellido" name="Apellido" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="register-email">Correo Electrónico</label>
+                        <input type="email" id="register-email" name="Correo" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="register-direccion">Dirección</label>
+                        <input type="text" id="register-direccion" name="Direccion" required>
+                    </div>
+                    <div class="input-container">
+                        <label for="register-telefono">Teléfono</label>
+                        <input type="tel" id="register-telefono" name="Telefono" required>
+                    </div>
 
-    <div class="input-container">
-        <label for="register-rol">Selecciona Rol</label>
-        <select id="register-rol" name="Id_Rol" required>
-            <option value="" disabled selected>Selecciona Rol</option>
-            <option value="1">Entrenador</option>
-            <option value="2">Jugador</option>
-        </select>
-    </div>
+                    <div class="input-container">
+                        <label for="register-rol">Selecciona Rol</label>
+                        <select id="register-rol" name="Id_Rol" required>
+                            <option value="" disabled selected>Selecciona Rol</option>
+                            <option value="1">Entrenador</option>
+                            <option value="2">Jugador</option>
+                        </select>
+                    </div>
 
-    <!-- ===== NUEVO CAMPO DE CATEGORÍA (INICIALMENTE OCULTO) ===== -->
-    <div class="input-container" id="categoria-container" style="display: none;">
-        <label for="register-categoria">Selecciona Categoría</label>
-        <select id="register-categoria" name="Id_Categoria">
-            <option value="" disabled selected>Selecciona una categoría</option>
-            <option value="1">Iniciación</option>
-            <option value="2">Prejuvenil</option>
-            <option value="3">Juvenil</option>
-            <option value="4">Unica/Mayores</option>
-        </select>
-    </div>
-    <!-- ========================================================== -->
+                    <!-- ===== NUEVO CAMPO DE CATEGORÍA (INICIALMENTE OCULTO) ===== -->
+                    <div class="input-container" id="categoria-container" style="display: none;">
+                        <label for="register-categoria">Selecciona Categoría</label>
+                        <select id="register-categoria" name="Id_Categoria">
+                            <option value="" disabled selected>Selecciona una categoría</option>
+                            <option value="1">Iniciación</option>
+                            <option value="2">Prejuvenil</option>
+                            <option value="3">Juvenil</option>
+                            <option value="4">Unica/Mayores</option>
+                        </select>
+                    </div>
+                    <!-- ========================================================== -->
 
-    <div class="input-container">
-        <label for="register-password">Contraseña</label>
-        <div class="password-container">
-            <input type="password" id="register-password" name="Contraseña" required>
-            <button type="button" class="toggle-password" onclick="togglePassword('register-password')">👁️</button>
-        </div>
-    </div>
-    <button type="submit">Regístrate</button>
-</form>
+                    <div class="input-container">
+                        <label for="register-password">Contraseña</label>
+                        <div class="password-container">
+                            <input type="password" id="register-password" name="Contraseña" required>
+                            <button type="button" class="toggle-password"
+                                onclick="togglePassword('register-password')">👁️</button>
+                        </div>
+                        <ul id="password-checklist" class="checklist">
+                            <li id="req-length"><span>❌</span> Al menos 8 caracteres</li>
+                            <li id="req-upper"><span>❌</span> Una letra mayúscula (A-Z)</li>
+                            <li id="req-lower"><span>❌</span> Una letra minúscula (a-z)</li>
+                            <li id="req-number"><span>❌</span> Un número (0-9)</li>
+                            <li id="req-special"><span>❌</span> Un carácter especial (@$!%*?&)</li>
+                        </ul>
+                    </div>
+
+                    <div class="input-container">
+                        <br>
+                        <label for="register-confirm-password">Confirmar Contraseña</label>
+                        <div class="password-container">
+                            <input type="password" id="register-confirm-password" name="Confirmar_Contraseña" required>
+                            <button type="button" class="toggle-password"
+                                onclick="togglePassword('register-confirm-password')">👁️</button>
+                        </div>
+                    </div>
+                    <button type="submit">Regístrate</button>
+                </form>
 
             </div>
             </form>
@@ -172,6 +190,7 @@
             <p><a href="#">Política de Privacidad</a> | <a href="#">Términos y Condiciones</a></p>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>
