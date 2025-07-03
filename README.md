@@ -2,7 +2,7 @@
 
 ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white) ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white) ![EJS](https://img.shields.io/badge/EJS-9B2C3E?style=for-the-badge&logo=ejs&logoColor=white)
 
-Bienvenido a Futsal Life, una aplicación web completa construida con Node.js y Express para gestionar y explorar el mundo del futsal. La plataforma permite a los usuarios registrarse, iniciar sesión y administrar perfiles, así como interactuar con "productos" que pueden representar jugadores, equipos o artículos deportivos.
+Bienvenido a Futsal Life, una aplicación web completa construida con Node.js y Express para gestionar y explorar el mundo del futsal. La plataforma permite a los usuarios registrarse, iniciar sesión y administrar perfiles, así como interactuar con "productos" que pueden representar jugadores, equipos y usuarios.
 
 ## Tabla de Contenidos
 
